@@ -1,0 +1,23 @@
+﻿
+@model IEnumerable<BlackJack.Models.Player>
+@{
+  ViewBag.Title = "Game";
+}
+
+<h2>Game is started!</h2>
+
+
+<body>
+  <table>
+@foreach (var p in Model)
+{
+  {
+    <tr>
+      <td><p>@p.Id</p></td>
+      <td><p>@p.Name</p></td>
+      <td><p>@p.Count </p></td>
+    </tr>
+  }
+}
+  </table>
+</body>
