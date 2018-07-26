@@ -8,16 +8,20 @@
 
 
 <body>
-  <table>
-@foreach (var p in Model)
-{
+  @using (Html.BeginForm("Shuffle", "Player"))
   {
-    <tr>
-      <td><p>@p.Id</p></td>
-      <td><p>@p.Name</p></td>
-      <td><p>@p.Count </p></td>
-    </tr>
+    <input value="Shuffle" type="submit" />
   }
-}
+  <table>
+    @foreach (var p in Model)
+    {
+      {
+        <tr>
+          <td><p>@p.Id</p></td>
+          <td><p>@p.Name</p></td>
+          <td><p>@p.Count </p></td>
+        </tr>
+      }
+    }
   </table>
 </body>

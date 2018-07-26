@@ -10,7 +10,6 @@ namespace BlackJack
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new PlayerDbInitializer());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

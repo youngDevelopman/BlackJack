@@ -161,9 +161,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807261305338_InitialCreate.cs" />
+    <Compile Include="Migrations\201807261305338_InitialCreate.Designer.cs">
+      <DependentUpon>201807261305338_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807261312104_MigrateDB.cs" />
+    <Compile Include="Migrations\201807261312104_MigrateDB.Designer.cs">
+      <DependentUpon>201807261312104_MigrateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerContext.cs" />
-    <Compile Include="Models\PlayerDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +231,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807261305338_InitialCreate.resx">
+      <DependentUpon>201807261305338_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807261312104_MigrateDB.resx">
+      <DependentUpon>201807261312104_MigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
