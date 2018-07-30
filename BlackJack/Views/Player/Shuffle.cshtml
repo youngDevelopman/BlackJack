@@ -1,0 +1,35 @@
+﻿
+@model List<BlackJack.Models.Player>
+@{
+  ViewBag.Title = "Game";
+}
+
+<h2>Game is started!</h2>
+
+
+<body>
+  <table>
+    @foreach (var p in Model)
+    {
+      {
+        <tr>
+          <td><p>@p.Id</p></td>
+          <td><p>@p.Name</p></td>
+          <td><p>@p.Count </p></td>
+        </tr>
+      }
+    }
+  </table>
+
+  @using (Html.BeginForm("Shuffle","Player",FormMethod.Post))
+  {
+    for (int i = 0; i < Model.Count; i++)
+    {
+      @Html.HiddenFor(m => Model[i].Id)
+      @Html.HiddenFor(m => Model[i].Name)
+      @Html.HiddenFor(m => Model[i].Count)
+    }
+    <input type="submit" value="Shuffle" />
+  }
+
+</body>

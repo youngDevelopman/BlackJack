@@ -1,35 +1,48 @@
-﻿using BlackJack.Models;
+﻿using BlackJack.Interfaces;
+using BlackJack.Models;
 using System;
-using System.Linq;
-using System.Threading;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace BlackJack.Controllers
 {
     public class PlayerController : Controller
     {
-        PlayerContext playerDb = new PlayerContext();
+        IRepository repository;
+        static Random random = new Random();
 
-        // GET: Player
-        public ActionResult Game()
+        public PlayerController(IRepository r)
         {
-            return View(playerDb.Players);
+            repository = r;
         }
+        
+        // GET: Player
+        public ActionResult Shuffe()
+        {
+            return View(repository.GetPlayers());
+        }
+        
+        
 
         [HttpPost]
-        public ViewResult Shuffle()
+        public ActionResult Shuffle(List<Player> players)
         {
-            for(int i = 0; i < playerDb.Players.Count(); i++)
-            {
-                
-            }
-            return View("Game",playerDb.Players);
+            var newPlayers = GenerateCardsAllUsers(players);
+            return RedirectToAction("Shuffle",newPlayers);
         }
 
-        private static Cards GetRandomCards()
+        private List<Player> GenerateCardsAllUsers(List<Player> playersList)
         {
-            var v = Enum.GetValues(typeof(Cards));
-            return (Cards)v.GetValue(new Random().Next(0,v.Length));
+            foreach (var p in playersList)
+            {
+                p.Count += GenerateCard();
+            }
+            return playersList;
+        }
+
+        private int GenerateCard()
+        {
+            return random.Next(1, 11);
         }
     }
 }
