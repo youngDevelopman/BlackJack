@@ -27,6 +27,16 @@ namespace BlackJack.Models
             return db.Players.ToList();
         }
 
+        public void GenerateCards()
+        {
+            foreach(var p in db.Players)
+            {
+                p.Count += random.Next(1,11);
+                db.Entry(p).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+        }
+
        
     }
 }

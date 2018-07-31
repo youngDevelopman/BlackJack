@@ -15,34 +15,22 @@ namespace BlackJack.Controllers
         {
             repository = r;
         }
-        
+
         // GET: Player
-        public ActionResult Shuffe()
+        [HttpGet]
+        public ActionResult Shuffle()
         {
             return View(repository.GetPlayers());
         }
-        
-        
 
         [HttpPost]
         public ActionResult Shuffle(List<Player> players)
         {
-            var newPlayers = GenerateCardsAllUsers(players);
-            return RedirectToAction("Shuffle",newPlayers);
-        }
-
-        private List<Player> GenerateCardsAllUsers(List<Player> playersList)
-        {
-            foreach (var p in playersList)
+            foreach(var p in players)
             {
-                p.Count += GenerateCard();
+                p.Count += random.Next(2, 11);
             }
-            return playersList;
-        }
-
-        private int GenerateCard()
-        {
-            return random.Next(1, 11);
+            return View(players);
         }
     }
 }
