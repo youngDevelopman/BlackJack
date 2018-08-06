@@ -1,10 +1,13 @@
-﻿using BlackJackGame.Game;
+﻿using BlackJackGame;
+using BlackJackGame.Game;
 using System.Web.Mvc;
 
 namespace BlackJackGame.Controllers
 {
     public class HomeController : Controller
     {
+        static GameModel game;
+
         public ActionResult Index()
         {
             return View();
@@ -20,9 +23,19 @@ namespace BlackJackGame.Controllers
         [HttpPost]
         public ActionResult GameStartMenu(UserGameOptions gameOptions)
         {
-            return View();
+            game = new GameModel(gameOptions);
+            return RedirectToAction("GameSession");
         }
 
+        public ActionResult GameSession()
+        {
+            return View(game);
+        }
 
+        [HttpPost]
+        public void Shuffle()
+        {
+
+        }
     }
 }

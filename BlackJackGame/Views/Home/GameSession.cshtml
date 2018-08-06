@@ -1,0 +1,68 @@
+﻿@model BlackJackGame.Game.GameModel
+
+@{
+  ViewBag.Title = "GameSession";
+}
+
+<h2>Black Jack</h2>
+
+<table id="customers" class="table table-bordered table-hover">
+
+  <thead>
+
+    <tr>
+
+      <th>Name</th>
+
+      <th>Count</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr>
+
+      <td>@Model.Dealer.Name</td>
+
+      <td id="count">@Model.Dealer.Count</td>
+
+    </tr>
+
+    <tr>
+
+      <td>@Model.Player.Name</td>
+
+      <td id="count">@Model.Player.Count</td>
+
+    </tr>
+
+    @foreach (var bot in Model.Bots)
+
+    {
+
+      <tr>
+
+        <td>@bot.Name</td>
+
+        <td id="count">@bot.Count</td>
+
+      </tr>
+
+    }
+
+  </tbody>
+
+</table>
+
+@using (Ajax.BeginForm("Shuffle", new AjaxOptions { UpdateTargetId = "count" }))
+{
+  <inut type="submit" value="Give all players two cards" />
+}
+
+@Scripts.Render("~/scripts/jquery-3.3.1.min.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+
+
