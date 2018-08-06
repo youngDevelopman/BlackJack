@@ -7,10 +7,28 @@ namespace BlackJackGame.Game
     {
         public Player Player { get; set; }
         public Player Dealer { get; set; }
-        public List<Bot> Bots { get; set; }
-        public static List<Card> Cards { get; set; }
+        public List<Player> Bots { get; set; }
+        public  List<Card> Cards { get; set; }
 
-        static GameModel()
+      
+        public GameModel()
+        {
+            Player = new Player() { Id = 0, Name = "Player" };
+            Dealer = new Player() { Id = 1, Name = "Dealer" };
+            Bots = new List<Player>();
+
+            Bots.Add(new Player() { Id = 0, Name = "Bill" });
+            Bots.Add(new Player() { Id = 1, Name = "Tom" });
+
+            InitializeCards();
+        }
+
+        public GameModel(UserGameOptions userGameOptions) : this()
+        {
+            Player = new Player() { Name = userGameOptions.PlayerName };
+        }
+
+        private void InitializeCards()
         {
             Cards = new List<Card>();
 
@@ -28,7 +46,6 @@ namespace BlackJackGame.Game
             Cards.Add(new Card() { Id = 10, Name = "Queen", Suit = "Clubs", Value = 10 });
             Cards.Add(new Card() { Id = 11, Name = "King", Suit = "Clubs", Value = 10 });
             Cards.Add(new Card() { Id = 12, Name = "Ace", Suit = "Clubs", Value = 11 });
-
 
             // Add all Diamonds
             Cards.Add(new Card() { Id = 13, Name = "Two", Suit = "Diamonds", Value = 2 });
@@ -74,23 +91,6 @@ namespace BlackJackGame.Game
             Cards.Add(new Card() { Id = 49, Name = "Queen", Suit = "Spades", Value = 10 });
             Cards.Add(new Card() { Id = 50, Name = "King", Suit = "Spades", Value = 10 });
             Cards.Add(new Card() { Id = 51, Name = "Ace", Suit = "Spades", Value = 11 });
-
-
-        }
-
-        public GameModel()
-        {
-            Player = new Player() { Id = 0, Name = "Player" };
-            Dealer = new Player() { Id = 1, Name = "Dealer" };
-            Bots = new List<Bot>();
-
-            Bots.Add(new Bot() { Id = 0, Name = "Bill" });
-            Bots.Add(new Bot() { Id = 1, Name = "Tom" });
-        }
-
-        public GameModel(UserGameOptions userGameOptions) : this()
-        {
-            Player = new Player() { Name = userGameOptions.PlayerName };
         }
     }
 }

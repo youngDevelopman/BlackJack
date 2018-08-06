@@ -1,5 +1,7 @@
 ﻿using BlackJackGame;
 using BlackJackGame.Game;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace BlackJackGame.Controllers
@@ -32,10 +34,17 @@ namespace BlackJackGame.Controllers
             return View(game);
         }
 
-        [HttpPost]
+        
         public void Shuffle()
         {
-
+            Random random = new Random();
+            int randomCardId;
+            foreach(var b in game.Bots)
+            {
+                randomCardId= random.Next(0, 52);
+                var card = game.Cards.SingleOrDefault(c => c.Id == randomCardId);
+                b.CardInHand.Add(card);
+            }
         }
     }
 }
